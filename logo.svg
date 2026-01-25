@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <defs>
+    <!-- Amber gradient for the checkmark icon -->
+    <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="amberDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- VALID STATE text -->
+  <text x="12" y="72" 
+        font-family="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="42" 
+        font-weight="600" 
+        fill="#ffffff"
+        letter-spacing="0.5">VALID STATE</text>
+  
+  <!-- ADVISORY SERVICES text -->
+  <text x="14" y="98" 
+        font-family="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="18" 
+        font-weight="500" 
+        fill="#94a3b8"
+        letter-spacing="3">ADVISORY SERVICES</text>
+  
+  <!-- Checkmark/Arrow Icon -->
+  <g transform="translate(280, 12)">
+    <!-- Main V checkmark - back stroke -->
+    <path d="M45 0 L60 45 L75 90" 
+          stroke="url(#amberDark)" 
+          stroke-width="12" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+    
+    <!-- Main V checkmark - front stroke -->
+    <path d="M0 50 L45 0" 
+          stroke="url(#amberGradient)" 
+          stroke-width="12" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+    
+    <!-- Horizontal arrow line -->
+    <path d="M-5 45 L85 45" 
+          stroke="url(#amberGradient)" 
+          stroke-width="6" 
+          stroke-linecap="round"
+          fill="none"/>
+    
+    <!-- Arrow head -->
+    <path d="M75 35 L90 45 L75 55" 
+          stroke="url(#amberGradient)" 
+          stroke-width="6" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          fill="none"/>
+  </g>
+</svg>
