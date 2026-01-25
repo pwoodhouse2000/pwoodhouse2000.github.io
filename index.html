@@ -537,6 +537,68 @@
         }
 
         /* ============================================
+           HEADSHOT WITH HOVER MORPH
+           ============================================ */
+        .headshot {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto var(--space-lg);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 4px var(--bg-card),
+                0 0 0 6px var(--border-accent),
+                0 20px 40px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .headshot img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+
+        .headshot__ghibli {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .headshot__real {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .headshot:hover .headshot__ghibli {
+            opacity: 0;
+        }
+
+        .headshot:hover .headshot__real {
+            opacity: 1;
+        }
+
+        /* Subtle hint animation */
+        .headshot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .headshot:hover::after {
+            opacity: 1;
+        }
+
+        /* ============================================
            ANIMATIONS
            ============================================ */
         @keyframes fadeSlideUp {
@@ -671,6 +733,10 @@
         <!-- HERO -->
         <section class="hero">
             <div class="container">
+                <div class="headshot" title="Hover to see the real me">
+                    <img src="pete-ghibli.jpg" alt="Pete Woodhouse - Ghibli style illustration" class="headshot__ghibli">
+                    <img src="pete.jpg" alt="Pete Woodhouse" class="headshot__real">
+                </div>
                 <h1 class="hero__title">Pete <span>Woodhouse</span></h1>
                 <p class="hero__tagline">Technology Executive & Embedded Advisor</p>
                 <div class="hero__bio">
