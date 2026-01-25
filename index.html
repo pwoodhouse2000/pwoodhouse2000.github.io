@@ -443,6 +443,102 @@
         }
 
         /* ============================================
+           ASK A QUESTION FORM
+           ============================================ */
+        .ask {
+            padding: var(--space-lg) 0;
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.45s both;
+        }
+
+        .ask__card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--space-lg);
+        }
+
+        .ask__title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .ask__subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .ask__form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .ask__input,
+        .ask__textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ask__input:focus,
+        .ask__textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .ask__input::placeholder,
+        .ask__textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .ask__textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .ask__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+        }
+
+        .ask__submit {
+            align-self: flex-start;
+            padding: 0.875rem 1.75rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ask__submit:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        @media (max-width: 640px) {
+            .ask__row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
            CONTACT CTA
            ============================================ */
         .contact {
@@ -875,7 +971,7 @@
         <section class="notes">
             <div class="container">
                 <header class="notes__header">
-                    <h2 class="notes__title">Notes</h2>
+                    <h2 class="notes__title">Thoughts</h2>
                     <!-- Future: RSS link -->
                     <!-- <a href="/feed.xml" class="notes__rss">RSS</a> -->
                 </header>
@@ -908,6 +1004,33 @@
                         </footer>
                     </article>
                     -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ASK A QUESTION -->
+        <section class="ask">
+            <div class="container">
+                <div class="ask__card">
+                    <h2 class="ask__title">Ask a Question</h2>
+                    <p class="ask__subtitle">Have a technology or leadership challenge? I'd be happy to share my perspective.</p>
+                    
+                    <form class="ask__form" action="https://formsubmit.co/pete@validstateadvisory.com" method="POST">
+                        <!-- Formsubmit configuration -->
+                        <input type="hidden" name="_subject" value="New question from validstateadvisory.com">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
+                        
+                        <div class="ask__row">
+                            <input type="text" name="name" class="ask__input" placeholder="Your name" required>
+                            <input type="email" name="email" class="ask__input" placeholder="Your email" required>
+                        </div>
+                        
+                        <textarea name="question" class="ask__textarea" placeholder="What's on your mind?" required></textarea>
+                        
+                        <button type="submit" class="ask__submit">Send Question</button>
+                    </form>
                 </div>
             </div>
         </section>
