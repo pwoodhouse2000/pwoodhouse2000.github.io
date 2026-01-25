@@ -790,6 +790,61 @@
 </head>
 <body>
 
+    <script>
+    // Load posts dynamically from JSON
+    async function loadPosts() {
+        try {
+            const response = await fetch('/data/posts.json');
+            const data = await response.json();
+            const notesList = document.querySelector('.notes__list');
+            
+            if (!data.posts || data.posts.length === 0) {
+                notesList.innerHTML = '<div class="notes__empty">No thoughts yet. Check back soon!</div>';
+                return;
+            }
+            
+            // Sort by date, newest first
+            const posts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            notesList.innerHTML = posts.map(post => {
+                const date = new Date(post.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                const tags = (post.tags || []).map(tag => 
+                    `<span class="note__tag">#${tag}</span>`
+                ).join('');
+                
+                return `
+                    <article class="note" id="${post.id}">
+                        <div class="note__content">
+                            <p>${post.content}</p>
+                        </div>
+                        <footer class="note__meta">
+                            <time class="note__date" datetime="${post.date}">${formattedDate}</time>
+                            ${tags ? `<div class="note__tags">${tags}</div>` : ''}
+                        </footer>
+                    </article>
+                `;
+            }).join('');
+        } catch (error) {
+            console.error('Error loading posts:', error);
+            document.querySelector('.notes__list').innerHTML = 
+                '<div class="notes__empty">Unable to load thoughts. Please try again later.</div>';
+        }
+    }
+    
+    // Load posts when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadPosts);
+    } else {
+        loadPosts();
+    }
+    </script>
+
     <header>
         <div class="container">
             <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none" aria-label="Valid State Advisory Services">
@@ -972,38 +1027,12 @@
             <div class="container">
                 <header class="notes__header">
                     <h2 class="notes__title">Thoughts</h2>
-                    <!-- Future: RSS link -->
-                    <!-- <a href="/feed.xml" class="notes__rss">RSS</a> -->
+                    <a href="/feed.xml" class="notes__rss">RSS</a>
                 </header>
                 
                 <div class="notes__list">
-                    <!-- EXAMPLE POST - Remove or replace with real content -->
-                    <article class="note">
-                        <div class="note__content">
-                            <p>Launching my new advisory practice. After three decades building and scaling technology teams, I'm now helping growth-stage companies navigate their most critical transitions.</p>
-                        </div>
-                        <footer class="note__meta">
-                            <time class="note__date" datetime="2026-01-24">Jan 24, 2026</time>
-                            <div class="note__tags">
-                                <span class="note__tag">#launch</span>
-                            </div>
-                        </footer>
-                    </article>
-
-                    <!-- Add more posts here, newest first -->
-                    <!--
-                    <article class="note">
-                        <div class="note__content">
-                            <p>Your post content here. Links work like <a href="#">this</a>.</p>
-                        </div>
-                        <footer class="note__meta">
-                            <time class="note__date" datetime="2026-01-25">Jan 25, 2026</time>
-                            <div class="note__tags">
-                                <span class="note__tag">#topic</span>
-                            </div>
-                        </footer>
-                    </article>
-                    -->
+                    <!-- Posts load dynamically from data/posts.json -->
+                    <div class="notes__empty">Loading thoughts...</div>
                 </div>
             </div>
         </section>

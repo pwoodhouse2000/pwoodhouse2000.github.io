@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pete Woodhouse - Thoughts</title>
+    <link>https://validstateadvisory.com</link>
+    <description>Technology leadership insights from Pete Woodhouse, fractional CTO and embedded advisor.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Jan 2026 06:45:25 GMT</lastBuildDate>
+    <pubDate>Sat, 24 Jan 2026 18:00:00 GMT</pubDate>
+    <atom:link href="https://validstateadvisory.com/feed.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>pete@validstateadvisory.com (Pete Woodhouse)</managingEditor>
+    <webMaster>pete@validstateadvisory.com (Pete Woodhouse)</webMaster>
+
+    <item>
+      <title>Launching my new advisory practice. After three decades buil...</title>
+      <link>https://validstateadvisory.com#2026-01-24-launch</link>
+      <guid isPermaLink="true">https://validstateadvisory.com#2026-01-24-launch</guid>
+      <pubDate>Sat, 24 Jan 2026 18:00:00 GMT</pubDate>
+      <description>Launching my new advisory practice. After three decades building and scaling technology teams, I&apos;m now helping growth-stage companies navigate their most critical transitions. #launch #advisory</description>
+    </item>
+  </channel>
+</rss>

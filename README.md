@@ -4,79 +4,75 @@ Personal website and microblog for Pete Woodhouse / Valid State Advisory Service
 
 **Live site:** https://validstateadvisory.com/
 
+---
+
+## Quick Links
+
+- **📝 [How to Post](POSTING.md)** - Add new thoughts to your site
+- **🔄 [Syndication Setup](MAKE-SETUP.md)** - Auto-post to X, LinkedIn, Threads
+- **📡 [RSS Feed](https://validstateadvisory.com/feed.xml)** - Subscribe to updates
+
+---
+
 ## Architecture
 
 ### Current Setup
-- Single-page static site hosted on GitHub Pages
-- Custom domain via CNAME
-- All CSS inline in `index.html` for simplicity
+- Single-page site with dynamic post loading
+- Posts stored in `data/posts.json`
+- RSS feed auto-generated via GitHub Actions
+- Hosted on GitHub Pages with custom domain
 
 ### Design System
 - **Fonts:** Fraunces (headings) + DM Sans (body)
 - **Colors:** Dark slate palette with amber accent
 - **Animations:** CSS keyframe animations on page load
+- **Adaptive:** Auto-switches between light/dark mode
 
-## Microblog / Notes
+---
 
-The site includes a "Notes" section designed for short-form posts (similar to Simon Willison's TIL).
+## Posting Workflow
 
-### Adding Posts Manually
+### 1. Add a Post
+Edit `data/posts.json` via GitHub web editor or locally:
 
-Edit `index.html` and add new `.note` articles inside `.notes__list`:
-
-```html
-<article class="note">
-    <div class="note__content">
-        <p>Your post content here. <a href="https://example.com">Links</a> work too.</p>
-    </div>
-    <footer class="note__meta">
-        <time class="note__date" datetime="2026-01-25">Jan 25, 2026</time>
-        <div class="note__tags">
-            <span class="note__tag">#topic</span>
-        </div>
-    </footer>
-</article>
-```
-
-### Future: Dynamic Posts
-
-The HTML includes commented-out JavaScript for loading posts from JSON. To enable:
-
-1. Create `/data/posts.json`:
 ```json
 {
-  "posts": [
-    {
-      "id": "2026-01-24-1",
-      "content": "Post content here...",
-      "date": "2026-01-24T10:30:00Z",
-      "tags": ["ai", "leadership"],
-      "syndication": {
-        "twitter": "https://twitter.com/...",
-        "linkedin": "https://linkedin.com/..."
-      }
-    }
-  ]
+  "id": "2026-01-25-topic",
+  "content": "Your thought here...",
+  "date": "2026-01-25T09:30:00-08:00",
+  "tags": ["tag1", "tag2"]
 }
 ```
 
-2. Uncomment the `<script>` block at the bottom of `index.html`
+### 2. Automatic Processing
+- Push to GitHub
+- GitHub Action generates RSS feed
+- Site updates within 1 minute
+- Make.com syndicates to social platforms (if configured)
 
-### Future: Syndication to Social Platforms
+**Full details:** [POSTING.md](POSTING.md)
 
-Options for POSSE (Publish Own Site, Syndicate Elsewhere):
+---
 
-1. **RSS + IFTTT/Zapier** - Generate `/feed.xml`, use automation to post to X/LinkedIn/Threads
-2. **Micro.blog** - Paid service that handles cross-posting elegantly
-3. **Custom GitHub Actions** - On push, parse new posts and call social APIs
-4. **n8n or Make** - Self-hosted automation workflows
+## Syndication (Optional)
 
-Recommended approach: Add RSS feed generation, then use Zapier or n8n for syndication.
+Set up Make.com to automatically post to:
+- X (Twitter)
+- LinkedIn  
+- Threads
+- Others
+
+**Setup guide:** [MAKE-SETUP.md](MAKE-SETUP.md)
+
+**Cost:** Free (Make.com free tier: 1000 operations/month)
+
+---
 
 ## Development
 
-This is a static HTML file - just open `index.html` in a browser or use:
+This is mostly static HTML with JavaScript for dynamic post loading.
 
+**Local preview:**
 ```bash
 # Python
 python -m http.server 8000
@@ -85,17 +81,57 @@ python -m http.server 8000
 npx serve .
 ```
 
+**Generate RSS manually:**
+```bash
+node generate-rss.js
+```
+
+---
+
 ## Deployment
 
 Push to `main` branch → GitHub Pages auto-deploys to https://validstateadvisory.com/
 
+---
+
 ## Files
 
 ```
-├── index.html      # Main page (HTML + CSS)
-├── logo.png        # Company logo
-├── CNAME           # Custom domain config
-├── README.md       # This file
-└── data/           # Future: posts.json
-    └── posts.json
+├── index.html           # Main page (HTML + CSS + JS)
+├── logo.svg             # Adaptive logo
+├── pete.jpeg            # Headshot (real)
+├── pete-ghibli.jpeg     # Headshot (Ghibli style)
+├── data/
+│   └── posts.json       # All your posts
+├── generate-rss.js      # RSS generator script
+├── feed.xml             # Generated RSS feed
+├── .github/workflows/
+│   └── generate-rss.yml # Auto-generates RSS on post updates
+├── CNAME                # Custom domain config
+├── POSTING.md           # How to add posts
+├── MAKE-SETUP.md        # Syndication setup guide
+└── README.md            # This file
 ```
+
+---
+
+## Features
+
+✅ **Personal branding** - Ghibli hover effect, custom design  
+✅ **Microblogging** - JSON-based, easy to update  
+✅ **RSS feed** - Auto-generated on every post  
+✅ **Auto-syndication** - Posts to social platforms via Make.com  
+✅ **Light/dark mode** - Adapts to user preference  
+✅ **Contact form** - Via Formsubmit (free)  
+✅ **Mobile responsive** - Works on all devices  
+✅ **Fast** - Static site, minimal dependencies  
+
+---
+
+## Roadmap
+
+- [ ] Archive page for older posts
+- [ ] Search/filter by tags
+- [ ] Analytics integration
+- [ ] Newsletter signup (optional)
+
