@@ -4,226 +4,540 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pete Woodhouse | Valid State Advisory</title>
-    <meta name="description" content="Technology executive and advisor helping growth-stage companies scale engineering, product, and platform operations.">
+    <meta name="description" content="Technology executive and embedded advisor helping growth-stage companies scale engineering, product, and platform operations.">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Pete Woodhouse | Valid State Advisory">
+    <meta property="og:description" content="Technology executive and embedded advisor for growth-stage companies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://validstateadvisory.com/">
+    
+    <!-- Fonts: Fraunces (headings) + DM Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            /* Color Palette - Sophisticated dark with warm accent */
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2332;
+            --bg-card-hover: #232d3f;
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            
+            --border: rgba(148, 163, 184, 0.1);
+            --border-accent: rgba(245, 158, 11, 0.3);
+            
+            /* Typography */
+            --font-heading: 'Fraunces', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            --space-2xl: 6rem;
+            
+            /* Animation */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --duration: 0.6s;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-dark: #1a365d;
-            --primary-mid: #2b6cb0;
-            --primary-light: #4299e1;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --bg-light: #f7fafc;
-            --white: #ffffff;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.7;
             color: var(--text-primary);
-            background: var(--white);
+            background: var(--bg-primary);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* Ambient background gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 100% 0%, rgba(59, 130, 246, 0.05), transparent);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
         .container {
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
+            padding: 0 var(--space-md);
         }
 
+        .container--wide {
+            max-width: 960px;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
         header {
-            padding: 48px 0 32px;
-            text-align: center;
+            padding: var(--space-xl) 0 var(--space-lg);
+            animation: fadeSlideDown var(--duration) var(--ease-out) both;
         }
 
         .logo {
-            max-width: 280px;
+            max-width: 260px;
             height: auto;
-            margin-bottom: 8px;
+            filter: brightness(0) invert(1);
+            opacity: 0.95;
         }
 
-        main {
-            flex: 1;
-            padding: 24px 0 48px;
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            padding: var(--space-lg) 0 var(--space-xl);
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.1s both;
         }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 48px;
+        .hero__title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.02em;
         }
 
-        .intro h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
+        .hero__title span {
+            color: var(--accent);
         }
 
-        .intro .tagline {
-            font-size: 1.125rem;
+        .hero__tagline {
+            font-size: 1.25rem;
             color: var(--text-secondary);
             font-weight: 400;
+            margin-bottom: var(--space-lg);
         }
 
-        .bio {
-            background: var(--bg-light);
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 40px;
-        }
-
-        .bio p {
-            margin-bottom: 16px;
+        .hero__bio {
             color: var(--text-secondary);
+            max-width: 640px;
         }
 
-        .bio p:last-child {
+        .hero__bio p {
+            margin-bottom: var(--space-sm);
+        }
+
+        .hero__bio p:last-child {
             margin-bottom: 0;
         }
 
-        .highlights {
+        /* ============================================
+           STATS GRID
+           ============================================ */
+        .stats {
+            padding: var(--space-xl) 0;
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.2s both;
+        }
+
+        .stats__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
         }
 
-        .highlight-item {
+        .stat {
             text-align: center;
-            padding: 24px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            background: var(--white);
+            padding: var(--space-lg) var(--space-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
-        .highlight-item .number {
-            font-size: 2rem;
+        .stat:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+
+        .stat__number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
             font-weight: 600;
-            color: var(--primary-mid);
+            color: var(--accent);
             display: block;
+            line-height: 1.2;
         }
 
-        .highlight-item .label {
+        .stat__label {
             font-size: 0.875rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: var(--space-xs);
         }
 
-        .experience-tags {
+        /* ============================================
+           EXPERTISE TAGS
+           ============================================ */
+        .expertise {
+            padding: var(--space-lg) 0 var(--space-xl);
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.3s both;
+        }
+
+        .expertise__list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 48px;
+            gap: var(--space-xs);
+            justify-content: flex-start;
         }
 
         .tag {
-            background: var(--bg-light);
-            color: var(--primary-dark);
-            padding: 6px 14px;
-            border-radius: 20px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             font-size: 0.875rem;
             font-weight: 500;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
         }
 
-        .contact-section {
-            text-align: center;
-            padding: 40px 32px;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-mid) 100%);
-            border-radius: 12px;
-            color: var(--white);
+        .tag:hover {
+            color: var(--accent);
+            border-color: var(--border-accent);
         }
 
-        .contact-section h2 {
+        /* ============================================
+           NOTES/MICROBLOG SECTION
+           Architecture ready for future posts
+           ============================================ */
+        .notes {
+            padding: var(--space-xl) 0;
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.4s both;
+        }
+
+        .notes__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notes__title {
+            font-family: var(--font-heading);
             font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            color: var(--text-primary);
         }
 
-        .contact-section p {
-            opacity: 0.9;
-            margin-bottom: 24px;
+        .notes__rss {
+            font-size: 0.875rem;
+            color: var(--text-muted);
         }
 
-        .contact-links {
+        .notes__list {
             display: flex;
-            gap: 16px;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        /* Individual note/post card */
+        .note {
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .note:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+        }
+
+        .note__content {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .note__content p {
+            margin-bottom: var(--space-xs);
+        }
+
+        .note__content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .note__content a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .note__meta {
+            display: flex;
+            gap: var(--space-sm);
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .note__date {
+            color: var(--text-muted);
+        }
+
+        .note__tags {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .note__tag {
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        /* Empty state for notes */
+        .notes__empty {
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ============================================
+           CONTACT CTA
+           ============================================ */
+        .contact {
+            padding: var(--space-xl) 0;
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.5s both;
+        }
+
+        .contact__card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border-accent);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact__card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .contact__title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .contact__text {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact__links {
+            display: flex;
+            gap: var(--space-sm);
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .contact-link {
+        .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--white);
-            color: var(--primary-dark);
-            text-decoration: none;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
             border-radius: 8px;
             font-weight: 500;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
         }
 
-        .contact-link:hover {
+        .btn--primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn--primary:hover {
+            background: var(--accent-light);
+            color: var(--bg-primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px var(--accent-glow);
         }
 
-        .contact-link svg {
-            width: 20px;
-            height: 20px;
+        .btn--secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
+        .btn--secondary:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
         footer {
-            text-align: center;
-            padding: 32px 0;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            padding: var(--space-xl) 0 var(--space-lg);
+            border-top: 1px solid var(--border);
+            margin-top: var(--space-lg);
+            animation: fadeSlideUp var(--duration) var(--ease-out) 0.6s both;
         }
 
-        @media (max-width: 480px) {
-            header {
-                padding: 32px 0 24px;
+        .footer__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .footer__copy {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .footer__links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .footer__link {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .footer__link:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 640px) {
+            .stats__grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
             }
 
-            .logo {
-                max-width: 220px;
+            .stat {
+                padding: var(--space-md);
             }
 
-            .intro h1 {
-                font-size: 1.5rem;
+            .contact__card {
+                padding: var(--space-lg);
             }
 
-            .bio {
-                padding: 24px;
-            }
-
-            .contact-section {
-                padding: 32px 24px;
-            }
-
-            .contact-links {
+            .contact__links {
                 flex-direction: column;
             }
 
-            .contact-link {
+            .btn {
                 justify-content: center;
+            }
+
+            .footer__content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .notes__header {
+                flex-direction: column;
+                gap: var(--space-xs);
             }
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container">
             <img src="logo.png" alt="Valid State Advisory Services" class="logo">
@@ -231,68 +545,205 @@
     </header>
 
     <main>
-        <div class="container">
-            <section class="intro">
-                <h1>Pete Woodhouse</h1>
-                <p class="tagline">Technology Executive &amp; Embedded Advisor</p>
-            </section>
-
-            <section class="bio">
-                <p>I'm a seasoned technology and product executive with 30 years of experience leading engineering, product, and platform scale-ups across FinTech, HealthTech, and EdTech.</p>
-                <p>I work as an embedded advisor and fractional CTO for growth-stage companies navigating critical transitions—whether that's scaling teams, modernizing platforms, integrating AI, or preparing for a funding round.</p>
-                <p>My approach blends deep technical expertise with strategic business thinking. I've built and led global teams of 300+, driven platforms to profitability, and helped startups transform from early-stage to enterprise-ready.</p>
-            </section>
-
-            <section class="highlights">
-                <div class="highlight-item">
-                    <span class="number">30+</span>
-                    <span class="label">Years Experience</span>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Pete <span>Woodhouse</span></h1>
+                <p class="hero__tagline">Technology Executive & Embedded Advisor</p>
+                <div class="hero__bio">
+                    <p>I'm a seasoned technology and product executive with 30 years of experience leading engineering, product, and platform scale-ups across FinTech, HealthTech, and EdTech.</p>
+                    <p>I work as an embedded advisor and fractional CTO for growth-stage companies navigating critical transitions—whether that's scaling teams, modernizing platforms, integrating AI, or preparing for a funding round.</p>
+                    <p>My approach blends deep technical expertise with strategic business thinking. I've built and led global teams of 300+, driven platforms to profitability, and helped startups transform from early-stage to enterprise-ready.</p>
                 </div>
-                <div class="highlight-item">
-                    <span class="number">300+</span>
-                    <span class="label">Teams Led</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="number">3</span>
-                    <span class="label">Continents</span>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="experience-tags">
-                <span class="tag">FinTech</span>
-                <span class="tag">HealthTech</span>
-                <span class="tag">EdTech</span>
-                <span class="tag">AI &amp; ML</span>
-                <span class="tag">Platform Scale-up</span>
-                <span class="tag">Technical Debt</span>
-                <span class="tag">Team Building</span>
-            </section>
-
-            <section class="contact-section">
-                <h2>Let's Talk</h2>
-                <p>Exploring a technology challenge or leadership gap? I'd welcome a conversation.</p>
-                <div class="contact-links">
-                    <a href="mailto:pete@validstateadvisory.com" class="contact-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        Email Me
-                    </a>
-                    <a href="https://www.linkedin.com/in/woodhouse/" target="_blank" rel="noopener noreferrer" class="contact-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                        LinkedIn
-                    </a>
+        <!-- STATS -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats__grid">
+                    <div class="stat">
+                        <span class="stat__number">30+</span>
+                        <span class="stat__label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">300+</span>
+                        <span class="stat__label">Engineers Led</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">3</span>
+                        <span class="stat__label">Continents</span>
+                    </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <!-- EXPERTISE -->
+        <section class="expertise">
+            <div class="container">
+                <div class="expertise__list">
+                    <span class="tag">FinTech</span>
+                    <span class="tag">HealthTech</span>
+                    <span class="tag">EdTech</span>
+                    <span class="tag">AI & ML</span>
+                    <span class="tag">Platform Scale-up</span>
+                    <span class="tag">Technical Debt</span>
+                    <span class="tag">Team Building</span>
+                    <span class="tag">Due Diligence</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTES / MICROBLOG
+             ================================================
+             ARCHITECTURE NOTES:
+             
+             This section is designed for future microblog/notes functionality.
+             
+             To add posts:
+             1. Each .note element represents a single post
+             2. Posts can be generated from a posts.json file via JavaScript
+             3. Or use a static site generator (Jekyll, 11ty) to build from markdown
+             
+             For syndication to X/Threads/LinkedIn:
+             - Add RSS feed at /feed.xml
+             - Use services like: IFTTT, Zapier, or custom webhooks
+             - Consider: Micro.blog for POSSE (Publish Own Site, Syndicate Elsewhere)
+             
+             JSON structure for posts (future /data/posts.json):
+             {
+               "posts": [
+                 {
+                   "id": "2026-01-24-1",
+                   "content": "Post content here...",
+                   "date": "2026-01-24T10:30:00Z",
+                   "tags": ["ai", "leadership"],
+                   "syndication": {
+                     "twitter": "https://twitter.com/...",
+                     "linkedin": "https://linkedin.com/..."
+                   }
+                 }
+               ]
+             }
+             ================================================ -->
+        <section class="notes">
+            <div class="container">
+                <header class="notes__header">
+                    <h2 class="notes__title">Notes</h2>
+                    <!-- Future: RSS link -->
+                    <!-- <a href="/feed.xml" class="notes__rss">RSS</a> -->
+                </header>
+                
+                <div class="notes__list">
+                    <!-- EXAMPLE POST - Remove or replace with real content -->
+                    <article class="note">
+                        <div class="note__content">
+                            <p>Launching my new advisory practice. After three decades building and scaling technology teams, I'm now helping growth-stage companies navigate their most critical transitions.</p>
+                        </div>
+                        <footer class="note__meta">
+                            <time class="note__date" datetime="2026-01-24">Jan 24, 2026</time>
+                            <div class="note__tags">
+                                <span class="note__tag">#launch</span>
+                            </div>
+                        </footer>
+                    </article>
+
+                    <!-- Add more posts here, newest first -->
+                    <!--
+                    <article class="note">
+                        <div class="note__content">
+                            <p>Your post content here. Links work like <a href="#">this</a>.</p>
+                        </div>
+                        <footer class="note__meta">
+                            <time class="note__date" datetime="2026-01-25">Jan 25, 2026</time>
+                            <div class="note__tags">
+                                <span class="note__tag">#topic</span>
+                            </div>
+                        </footer>
+                    </article>
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT CTA -->
+        <section class="contact">
+            <div class="container">
+                <div class="contact__card">
+                    <h2 class="contact__title">Let's Talk</h2>
+                    <p class="contact__text">Exploring a technology challenge or leadership gap? I'd welcome a conversation.</p>
+                    <div class="contact__links">
+                        <a href="mailto:pete@validstateadvisory.com" class="btn btn--primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/woodhouse/" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Valid State Advisory Services. All rights reserved.</p>
+            <div class="footer__content">
+                <p class="footer__copy">&copy; 2026 Valid State Advisory Services</p>
+                <nav class="footer__links">
+                    <!-- Future: Add more footer links -->
+                    <a href="mailto:pete@validstateadvisory.com" class="footer__link">Contact</a>
+                    <!-- <a href="/feed.xml" class="footer__link">RSS</a> -->
+                </nav>
+            </div>
         </div>
     </footer>
+
+    <!-- 
+    ================================================
+    FUTURE: Dynamic Post Loading
+    ================================================
+    Uncomment and customize this script to load posts from JSON:
+    
+    <script>
+    async function loadPosts() {
+        try {
+            const response = await fetch('/data/posts.json');
+            const data = await response.json();
+            const notesList = document.querySelector('.notes__list');
+            
+            notesList.innerHTML = data.posts.map(post => `
+                <article class="note">
+                    <div class="note__content">
+                        <p>${post.content}</p>
+                    </div>
+                    <footer class="note__meta">
+                        <time class="note__date" datetime="${post.date}">
+                            ${new Date(post.date).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                            })}
+                        </time>
+                        <div class="note__tags">
+                            ${post.tags.map(tag => `<span class="note__tag">#${tag}</span>`).join('')}
+                        </div>
+                    </footer>
+                </article>
+            `).join('');
+        } catch (error) {
+            console.log('No posts loaded:', error);
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadPosts);
+    </script>
+    -->
+
 </body>
 </html>
