@@ -131,6 +131,69 @@
             display: block;
         }
 
+        .logo-text-primary {
+            fill: var(--text-primary);
+        }
+
+        .logo-text-secondary {
+            fill: var(--text-secondary);
+        }
+
+        .logo-accent {
+            stroke: url(#amberGradient);
+        }
+
+        .logo-accent-dark {
+            stroke: url(#amberDark);
+        }
+
+        /* ============================================
+           LIGHT MODE
+           ============================================ */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #f8fafc;
+                --bg-secondary: #f1f5f9;
+                --bg-card: #ffffff;
+                --bg-card-hover: #f8fafc;
+                
+                --text-primary: #0f172a;
+                --text-secondary: #475569;
+                --text-muted: #64748b;
+                
+                --accent: #d97706;
+                --accent-light: #f59e0b;
+                --accent-glow: rgba(217, 119, 6, 0.15);
+                
+                --border: rgba(15, 23, 42, 0.1);
+                --border-accent: rgba(217, 119, 6, 0.3);
+            }
+
+            body::before {
+                background: 
+                    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.06), transparent),
+                    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(59, 130, 246, 0.04), transparent);
+            }
+
+            .stat:hover,
+            .note:hover,
+            .tag:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .contact__card {
+                background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            }
+
+            .contact__card::before {
+                background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            }
+
+            .btn--secondary {
+                background: var(--bg-secondary);
+            }
+        }
+
         /* ============================================
            HERO SECTION
            ============================================ */
@@ -539,7 +602,68 @@
 
     <header>
         <div class="container">
-            <img src="logo.svg" alt="Valid State Advisory Services" class="logo">
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none" aria-label="Valid State Advisory Services">
+                <defs>
+                    <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fbbf24"/>
+                        <stop offset="100%" stop-color="#f59e0b"/>
+                    </linearGradient>
+                    <linearGradient id="amberDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f59e0b"/>
+                        <stop offset="100%" stop-color="#d97706"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- VALID STATE text -->
+                <text x="12" y="72" 
+                      font-family="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" 
+                      font-size="42" 
+                      font-weight="600" 
+                      class="logo-text-primary"
+                      letter-spacing="0.5">VALID STATE</text>
+                
+                <!-- ADVISORY SERVICES text -->
+                <text x="14" y="98" 
+                      font-family="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" 
+                      font-size="18" 
+                      font-weight="500" 
+                      class="logo-text-secondary"
+                      letter-spacing="3">ADVISORY SERVICES</text>
+                
+                <!-- Checkmark/Arrow Icon -->
+                <g transform="translate(280, 12)">
+                    <!-- Main V checkmark - back stroke -->
+                    <path d="M45 0 L60 45 L75 90" 
+                          class="logo-accent-dark"
+                          stroke-width="12" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"
+                          fill="none"/>
+                    
+                    <!-- Main V checkmark - front stroke -->
+                    <path d="M0 50 L45 0" 
+                          class="logo-accent"
+                          stroke-width="12" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"
+                          fill="none"/>
+                    
+                    <!-- Horizontal arrow line -->
+                    <path d="M-5 45 L85 45" 
+                          class="logo-accent"
+                          stroke-width="6" 
+                          stroke-linecap="round"
+                          fill="none"/>
+                    
+                    <!-- Arrow head -->
+                    <path d="M75 35 L90 45 L75 55" 
+                          class="logo-accent"
+                          stroke-width="6" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"
+                          fill="none"/>
+                </g>
+            </svg>
         </div>
     </header>
 
